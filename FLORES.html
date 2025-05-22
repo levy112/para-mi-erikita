@@ -7,6 +7,31 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" href="img/flowers.png" type="image/x-icon">
     <title>FLORES</title>
+    <style>
+      /* Estilo del botón como ícono de flecha */
+      .back-button {
+          position: fixed;
+          top: 20px;
+          left: 20px;
+          width: 40px;
+          height: 40px;
+          background-color: rgba(255, 255, 255, 0.7); /* Fondo semitransparente */
+          color: #333; /* Color de la flecha */
+          border: none;
+          border-radius: 50%; /* Forma circular */
+          cursor: pointer;
+          font-size: 24px;
+          z-index: 1000;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
+      }
+      .back-button:hover {
+          background-color: rgba(255, 255, 255, 0.9); /* Fondo más claro al pasar el mouse */
+      }
+  </style>
 </head>
 
 <body class="container">
@@ -309,6 +334,7 @@
 
     </div>
     <h1 class="title"><span id="title"></span></h1>
+    <a href="index.html" class="back-button" title="Volver al inicio">←</a>
     <script src="main.js"></script>
   </body>
 </html>
