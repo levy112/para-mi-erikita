@@ -18,10 +18,50 @@
         .counter .number {
             font-weight: bold;
             color: #e75480;
+            font-size: x-large;
         }
         .hidden {
             display: none;
         }
+        .counter {
+            margin: 20px 0;
+            font-size: 1.2em;
+            color: #333;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .counter-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .counter-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 80px;
+        }
+        .counter .number {
+            font-weight: bold;
+            color: #e75480;
+            font-size: 3em;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        .counter-label {
+            font-size: 1em;
+            color: #666;
+        }
+        .hidden {
+            display: none;
+        }
+        .date-text {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
     </style>
 </head>
 <body>
@@ -30,6 +70,7 @@
         <span>O</span>
         <span>L</span>
         <span>A</span>
+        <span><3</span>
     </div>
     <div class="greetings">
         <span></span>
@@ -42,15 +83,34 @@
     <div class="description">
         <span>Tengo un regalo especial para ti!!</span>
     </div>
-    
     <div class="counter">
-        Novios desde el 16 de mayo de 2025, 5:50 hrs... <br>
-        <span id="years-container" class="hidden"><span id="years" class="number">0</span> años, </span>
-        <span id="months-container" class="hidden"><span id="months" class="number">0</span> meses, </span>
-        <span id="days" class="number">0</span> días, 
-        <span id="hours" class="number">0</span> horas, 
-        <span id="minutes" class="number">0</span> minutos y
-        <span id="seconds" class="number">0</span> segundos
+        <div class="date-text">Somos novios desde el 16 de mayo de 2025, 17:50 hrs y contando</div>
+        <div class="counter-container">
+            <div id="years-container" class="counter-item hidden">
+                <span id="years" class="number">0</span>
+                <span class="counter-label">años</span>
+            </div>
+            <div id="months-container" class="counter-item hidden">
+                <span id="months" class="number">0</span>
+                <span class="counter-label">meses</span>
+            </div>
+            <div class="counter-item">
+                <span id="days" class="number">0</span>
+                <span class="counter-label">días</span>
+            </div>
+            <div class="counter-item">
+                <span id="hours" class="number">0</span>
+                <span class="counter-label">horas</span>
+            </div>
+            <div class="counter-item">
+                <span id="minutes" class="number">0</span>
+                <span class="counter-label">minutos</span>
+            </div>
+            <div class="counter-item">
+                <span id="seconds" class="number">0</span>
+                <span class="counter-label">segundos</span>
+            </div>
+        </div>
     </div>
     
     <div class="button">
@@ -61,7 +121,7 @@
 
     <script>
         // Fecha de inicio más legible (usa "May" para mayo)
-        const startDate = new Date("May 16, 2025 05:50:00");
+        const startDate = new Date("May 16, 2025 17:50:00");
         
         function updateCounter() {
             const now = new Date();
