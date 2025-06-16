@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,7 +29,7 @@
             color: #333;
             text-align: center;
             font-family: Arial, sans-serif;
-        }
+        }        
         .counter-container {
             display: flex;
             justify-content: center;
@@ -56,22 +56,82 @@
         }
         .hidden {
             display: none;
-        }
+        }        
         .date-text {
             margin-bottom: 20px;
             font-size: 1.2em;
         }
-
+        
+        /* Estilos para el mensaje de frutas */
+        #fruit-greeting {
+            font-size: 2.5rem;
+            font-weight: 900;
+            /* color: #e75480; */
+            text-align: center;
+            margin: 30px 0;
+            min-height: 1.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        /* Animación para el texto */
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4;
+            }
+            50% {
+                text-shadow: none;
+            }
+        }
+        
+        /* Animación para los emojis */
+        @keyframes emojiBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px) scale(1.2);
+            }
+        }
+        
+        .fruit-text {
+            animation: textGlow 3s ease-in-out infinite;
+        }
+        
+        .fruit-emoji {
+            font-size: 2.5rem;
+            animation: emojiBounce 1.5s ease infinite;
+            display: inline-block;
+        }
+        
+        .button button {
+            background: #ff69b4;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .button button:hover {
+            background: #e75480;
+            transform: scale(1.05);
+        }
+        
+        .button a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <div class="greetings">
-        <span>H</span>
-        <span>O</span>
-        <span>L</span>
-        <span>A</span>
-        <span><3</span>
-    </div>
+    <div id="fruit-greeting"></div>
     <div class="greetings">
         <span></span>
         <span></span>
@@ -120,6 +180,54 @@
     </div>
 
     <script>
+        // Lista de frutas con apodos cariñosos y sus emojis correspondientes
+        const fruitGreetings = [
+            { text: "HOLA CORAZÓN DE MELÓN", emoji: "🍈" },
+            { text: "HOLA CORAZÓN DE FRESA", emoji: "🍓" },
+            { text: "HOLA CORAZÓN DE MANZANA", emoji: "🍎" },
+            { text: "HOLA CORAZÓN DE TOMATE", emoji: "🍅" },
+            { text: "HOLA CORAZÓN DE DURAZNO", emoji: "🍑" },
+            { text: "HOLA CORAZÓN DE MAÍZ", emoji: "🌽" },
+            { text: "HOLA CORAZÓN DE CHAMPIÑÓN", emoji: "🍄" },
+            { text: "HOLA CORAZÓN DE CEREZA", emoji: "🍒" },
+            { text: "HOLA CORAZÓN DE KIWI", emoji: "🥝" },
+            { text: "HOLA CORAZÓN DE SANDÍA", emoji: "🍉" },
+            { text: "HOLA CORAZÓN DE CHÍCHARO", emoji: "🫛" },
+            { text: "HOLA CORAZÓN DE PIÑA", emoji: "🍍" },
+            { text: "HOLA CORAZÓN DE UVA", emoji: "🍇" },
+            { text: "HOLA CORAZÓN DE CEBOLLA", emoji: "🧅" },
+            { text: "HOLA CORAZÓN DE MANGO", emoji: "🥭" },
+            { text: "HOLA CORAZÓN DE LECHUGA", emoji: "🥬" },
+            { text: "HOLA CORAZÓN DE PERA", emoji: "🍐" },
+            { text: "HOLA CORAZÓN DE PLÁTANO", emoji: "🍌" },
+            { text: "HOLA CORAZÓN DE COCO", emoji: "🥥" },
+            { text: "HOLA CORAZÓN DE PAPAYA", emoji: "🍈" },
+            { text: "HOLA CORAZÓN DE GUAYABA", emoji: "🍏" },
+            { text: "HOLA CORAZÓN DE FRAMBUESA", emoji: "🍓" },
+            { text: "HOLA CORAZÓN DE PAPA", emoji: "🥔" },
+            { text: "HOLA CORAZÓN DE GRANADA", emoji: "🍎" },
+            { text: "HOLA CORAZÓN DE NARANJA", emoji: "🍊" },
+            { text: "HOLA CORAZÓN DE LIMÓN", emoji: "🍋" },
+            { text: "HOLA CORAZÓN DE MANDARINA", emoji: "🍊" }
+        ];
+
+        // Función para mostrar un saludo aleatorio con emoji
+        function showRandomFruitGreeting() {
+            const greetingElement = document.getElementById('fruit-greeting');
+            const randomIndex = Math.floor(Math.random() * fruitGreetings.length);
+            const greeting = fruitGreetings[randomIndex];
+            
+            // Crear elementos para el texto y el emoji
+            greetingElement.innerHTML = `
+                <span class="fruit-text">${greeting.text}</span>
+                <span class="fruit-emoji">${greeting.emoji}</span>
+            `;
+        }
+
+        // Mostrar un saludo inicial y cambiar cada 2 segundos
+        showRandomFruitGreeting();
+        setInterval(showRandomFruitGreeting, 2000);
+
         // Fecha de inicio más legible (usa "May" para mayo)
         const startDate = new Date("May 16, 2025 17:50:00");
         
