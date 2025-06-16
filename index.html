@@ -29,7 +29,7 @@
             color: #333;
             text-align: center;
             font-family: Arial, sans-serif;
-        }        
+        }    
         .counter-container {
             display: flex;
             justify-content: center;
@@ -143,8 +143,8 @@
     <div class="description">
         <span>Tengo un regalo especial para ti!!</span>
     </div>
+    <div class="date-text">Somos novios desde el 16 de mayo de 2025, 17:50 hrs y contando</div>
     <div class="counter">
-        <div class="date-text">Somos novios desde el 16 de mayo de 2025, 17:50 hrs y contando</div>
         <div class="counter-container">
             <div id="years-container" class="counter-item hidden">
                 <span id="years" class="number">0</span>
@@ -230,24 +230,33 @@
 
         // Fecha de inicio más legible (usa "May" para mayo)
         const startDate = new Date("May 16, 2025 17:50:00");
-        
+
         function updateCounter() {
             const now = new Date();
             
+            // Si la fecha actual es anterior a la fecha de inicio, mostrar ceros
             if (now < startDate) {
                 document.querySelectorAll('.number').forEach(el => el.textContent = 0);
                 return;
             }
             
+            // Calcular años
             let years = now.getFullYear() - startDate.getFullYear();
-            let months = now.getMonth() - startDate.getMonth();
             
+            // Calcular meses (solo aumenta si ya pasó el día y hora exactos)
+            let months = now.getMonth() - startDate.getMonth();
             if (months < 0) {
                 years--;
                 months += 12;
             }
             
-            if (now.getDate() < startDate.getDate()) {
+            // Verificar si ya pasó el día y hora exactos del mes
+            const hasReachedMonthAnniversary = (
+                now.getDate() > startDate.getDate() ||
+                (now.getDate() === startDate.getDate() && now.getHours() >= startDate.getHours() && now.getMinutes() >= startDate.getMinutes())
+            );
+            
+            if (!hasReachedMonthAnniversary) {
                 months--;
                 if (months < 0) {
                     years--;
@@ -255,11 +264,12 @@
                 }
             }
             
-            const tempDate = new Date(startDate);
-            tempDate.setFullYear(startDate.getFullYear() + years);
-            tempDate.setMonth(startDate.getMonth() + months);
+            // Calcular días restantes (desde el último aniversario mensual)
+            const lastAnniversary = new Date(startDate);
+            lastAnniversary.setFullYear(startDate.getFullYear() + years);
+            lastAnniversary.setMonth(startDate.getMonth() + months);
             
-            let diff = now - tempDate;
+            let diff = now - lastAnniversary;
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             diff -= days * 1000 * 60 * 60 * 24;
             const hours = Math.floor(diff / (1000 * 60 * 60));
@@ -267,20 +277,20 @@
             const minutes = Math.floor(diff / (1000 * 60));
             diff -= minutes * 1000 * 60;
             const seconds = Math.floor(diff / 1000);
-            
+
             // Mostrar/ocultar años y meses
             document.getElementById('years-container').classList.toggle('hidden', years <= 0);
             document.getElementById('months-container').classList.toggle('hidden', months <= 0 && years <= 0);
             
-            // Actualizar valores
-            if (years > 0) document.getElementById('years').textContent = years;
-            if (months > 0) document.getElementById('months').textContent = months;
+            // Actualizar valores (asegurando que no sean negativos)
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
             document.getElementById('days').textContent = days;
             document.getElementById('hours').textContent = hours;
             document.getElementById('minutes').textContent = minutes;
             document.getElementById('seconds').textContent = seconds;
         }
-        
+
         updateCounter();
         setInterval(updateCounter, 1000);
     </script>
